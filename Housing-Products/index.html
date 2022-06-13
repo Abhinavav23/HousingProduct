@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./style.css">
+    <title>Housing Products</title>
+</head>
+<body>
+
+    <!-- navbar -->
+    <nav class="navbar">
+        <div class="navbar-center">
+           <span class="nav-icon"> <i class="fa-solid fa-bars"></i></span>
+           <ul>
+               <li><a href="#">HOME</a></li>
+               <li><a href="#">ABOUT</a></li>
+               <li><a href="#">POLICIES</a></li>
+           </ul>
+           <div>
+            <input type="text">
+            <button>search</button>
+           </div>
+           <div class="cart-btn">
+            <span> <i class="fas fa-cart-plus"></i></span>
+            <div class="cart-items">0</div>
+           </div>
+           <a href="#">LOGIN</a>
+        </div>
+    </nav>
+
+    <!-- products -->
+    <main class="products">
+        <header class="section-title"><h2>Products</h2></header>
+        <div class="products-center">
+            <!-- list of products -->
+        </div>
+    </main>
+
+    <!-- cart container -->
+    <div class="cart-overlay">
+        <div class="">
+            <span class="close-cart">
+                <i class="fa-solid fa-xmark"></i>
+            </span>
+            
+            <h2>Your cart</h2>
+            <div class="cart-content">
+                <!-- list of items in the cart -->
+            </div>
+
+            <div class="cart-footer">
+                <h3>your Total: <span class="cart-total">0</span></h3>
+                <button class="btn-clear ">Clear cart</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>

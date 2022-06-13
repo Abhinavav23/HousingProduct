@@ -1,0 +1,44 @@
+{
+    "items": [
+        {
+            "id": "1",
+            "fields": {
+                "title": "Queen size bed",
+                "type": "Household",
+                "price": 2500,
+                "rating": 4,
+                "image": {"url": "./images/product-1.jpeg"}
+            }
+        },
+        {
+            "id": "2",
+            "fields": {
+                "title": "King size bed",
+                "type": "Household",
+                "price": 4500,
+                "rating": 4,
+                "image": {"url": "./images/product-2.jpeg"}
+            }
+        },
+        {
+            "id": "3",
+            "fields": {
+                "title": "single bed",
+                "type": "Household",
+                "price": "2000",
+                "rating": 3,
+                "image": {"url": "./images/product-3.jpeg"}
+            }
+        },
+        {
+            "id": "4",
+            "fields": {
+                "title": "Double size bed",
+                "type": "Household",
+                "price": "3500",
+                "rating": 5,
+                "image": {"url": "./images/product-4.jpeg"}
+            }
+        }
+    ]
+}
