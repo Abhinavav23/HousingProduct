@@ -1,63 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="./style.css">
-    <title>Housing Products</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <!-- <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+      integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
+      crossorigin="anonymous"
+    /> -->
 
-    <!-- navbar -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>House Needs</title>
+  </head>
+  <body>
     <nav class="navbar">
-        <div class="navbar-center">
-           <span class="nav-icon"> <i class="fa-solid fa-bars"></i></span>
-           <ul>
-               <li><a href="#">HOME</a></li>
-               <li><a href="#">ABOUT</a></li>
-               <li><a href="#">POLICIES</a></li>
-           </ul>
-           <div>
-            <input type="text">
-            <button>search</button>
-           </div>
-           <div class="cart-btn">
-            <span> <i class="fas fa-cart-plus"></i></span>
-            <div class="cart-items">0</div>
-           </div>
-           <a href="#">LOGIN</a>
-        </div>
+      <div class="navbar-center">
+            <span class="nav-icon">
+                <i class="fas fa-bars"></i>
+            </span>
+            <ul>
+                <li><a href="#Home">HOME</a></li>
+                <li><a href="#Shop">SHOP</a></li>
+                <li><a href="#Magazine">MAGAZINE</a></li>
+            </ul>
+            <div class="searchbar">
+                <input type="text">
+                <button class="search">search</button>
+            </div>
+            <div class="cart-btn">
+                <span ><i class="fas fa-cart-plus"></i></span></li>
+                <div class="cart-items">0</div>
+            </div>
+            <a href="#">LOGIN</a>
+      </div>
     </nav>
 
-    <!-- products -->
-    <main class="products">
-        <header class="section-title"><h2>Products</h2></header>
-        <div class="products-center">
-            <!-- list of products -->
+    <section class="products">
+        <div class="section-title">
+            <h2>our products</h2>
         </div>
-    </main>
-
-    <!-- cart container -->
-    <div class="cart-overlay">
-        <div class="">
-            <span class="close-cart">
-                <i class="fa-solid fa-xmark"></i>
-            </span>
+        <div class="products-center">
+            <!-- product -->
             
-            <h2>Your cart</h2>
-            <div class="cart-content">
-                <!-- list of items in the cart -->
-            </div>
+        </div>
+    </section>
 
+    <!-- cart -->
+    <div class="cart-overlay">
+        <div class="cart">
+            <span class="close-cart">
+                <i class="fas fa-window-close"></i>
+            </span>
+            <h2>Your Cart</h2>
+            <div class="cart-content">
+                <!-- cart-item -->
+            </div>
             <div class="cart-footer">
-                <h3>your Total: <span class="cart-total">0</span></h3>
-                <button class="btn-clear ">Clear cart</button>
+                <h3>Your Total: $ <span class="cart-total">0</span></h3>
+                <button class="btn-clear">Clear Cart</button>
             </div>
         </div>
     </div>
 
-    <script src="./script.js"></script>
-</body>
+    <script src="./app.js"></script>
+  </body>
 </html>

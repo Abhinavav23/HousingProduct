@@ -32,7 +32,7 @@ a {
 .navbar {
   position: sticky;
   top: 0;
-  height: 3rem;
+  height: 50px;
   width: 100%;
   background: var(--rootwhite);
   display: flex;
@@ -42,9 +42,10 @@ a {
 
 .navbar ul {
   display: flex;
+  float: left;
   list-style: none;
+  font-size: small;
 }
-
 .navbar ul span {
   font-size: medium;
 }
@@ -116,7 +117,7 @@ a {
   padding: 0.75rem 0.5rem;
   border: none;
   cursor: pointer;
-  transform: translateX(100%);
+  transform: translateX(101%);
   letter-spacing: var(--rootspacing);
   transition: var(--mainTransition);
   border-radius: 3px;
@@ -176,7 +177,6 @@ a {
   background: rgb(254, 157, 81, 0.5);
   transition: var(--mainTransition);
   visibility: hidden;
-  /* display: none; */
 }
 .cart {
   position: fixed;
@@ -195,7 +195,6 @@ a {
 .show-cart {
   visibility: visible;
 }
-
 .transparentbg {
   transform: translateX(0);
 }
@@ -242,6 +241,10 @@ a {
 .remove-item {
   color: grey;
   cursor: pointer;
+  border: 1px solid rgb(97, 93, 93);
+  padding: 0.125rem 0.25rem;
+  margin-left: -0.25rem;
+  border-radius: 0.25rem;
 }
 .addremove {
   font-size: 1.2rem;
