@@ -9,6 +9,14 @@ const cartButton = document.querySelector(".cart-btn");
 const cartClose = document.querySelector(".close-cart");
 const clearCart = document.querySelector(".btn-clear");
 const removeItem = document.querySelector(".remove-item");
+const loginLink = document.querySelector(".login-link");
+const loginModal = document.querySelector(".login-modal");
+const buyModal = document.querySelector(".buy-modal");
+const buyContent = document.querySelector(".buy-content");
+const closeModal = document.querySelector(".close-modal");
+const closeBuyModal = document.querySelector(".close-buy-modal");
+const btnBuy = document.querySelector(".btn-buy");
+const totalBuyPrice = document.querySelector(".total-Buy-Price");
 
 //cart products
 let cart = [];
@@ -116,8 +124,10 @@ class UserInterface {
   }
 
   resetButtons() {
+    //convert nodelist into an array
     let buttons = [...document.querySelectorAll(".bag-btn")];
     buttons.forEach((btn) => {
+      // getting id from data attribute --->data-id
       let id = btn.dataset.id;
       let incart = cart.find((items) => items.id === id);
       if (incart) {
@@ -162,6 +172,7 @@ class UserInterface {
   cartFuntionality() {
     cartDom.addEventListener("click", (event) => {
       if (event.target.classList.contains("remove-item")) {
+        // filter can be used
         let index = cart.findIndex(
           (item) => item.id === event.target.dataset.id
         );
@@ -169,7 +180,7 @@ class UserInterface {
         Storage.setCartItems(cart);
         //setting the cart values
         this.setCartValues(cart);
-        //show cart values
+        // will add updated cart html in in the cart
         this.addCartItems(cart);
         //resetting buttons
         this.resetButtons();
@@ -183,7 +194,6 @@ class UserInterface {
         //show cart values
         this.addCartItems(cart);
       }
-
       if (event.target.classList.contains("fa-minus-circle")) {
         let tempItem = cart.find(item => item.id === event.target.parentElement.dataset.id)
         if(tempItem.amount === 1){
@@ -207,7 +217,40 @@ class UserInterface {
         this.addCartItems(cart);
       }
     });
+  }
 
+  clearCart(){
+    cart = [];
+    Storage.setCartItems(cart);
+    //setting the cart values
+    this.setCartValues(cart);
+    //show cart values
+    this.addCartItems(cart);
+    //removing show class
+    this.closeCart();
+    //resetting buttons
+    this.resetButtons();
+  }
+
+  addCartItemsToModel(cart){
+    let cartHtml = "";
+    let totalPrice = 0
+    cart.forEach((cartItem) => {
+      totalPrice += cartItem.price*cartItem.amount
+      cartHtml += ` <div class="cart-item">
+                <img src=${cartItem.url} alt="cart">
+                <div>
+                    <h4>${cartItem.title}</h4>
+                    <h5>$ ${cartItem.price}</h5>
+                </div>
+                <div class="addremove" data-id=${cartItem.id}>
+                    <p class="itemNo">${cartItem.amount}</p>
+                </div>
+              </div>
+          `;
+    });
+    buyContent.innerHTML = cartHtml;
+    totalBuyPrice.innerHTML = totalPrice;
   }
 }
 
@@ -264,21 +307,54 @@ cartButton.addEventListener("click", () => {
   ui.showCart();
 });
 
-clearCart.addEventListener("click", () => {
+btnBuy.onclick = () => {
   const ui = new UserInterface();
-  cart = [];
-  Storage.setCartItems(cart);
-  //setting the cart values
-  ui.setCartValues(cart);
-  //show cart values
-  ui.addCartItems(cart);
-  //removing show class
+  let cartval = Storage.getCart();
+  ui.addCartItemsToModel(cartval);
   ui.closeCart();
-  //resetting buttons
-  ui.resetButtons();
-});
+  ui.clearCart()
+  buyModal.style.display = "block";
+}
 
+closeBuyModal.onclick = () => {
+  buyModal.style.display = "none";
+}
 
+// clearCart.addEventListener("click", () => {
+//   const ui = new UserInterface();
+//   cart = [];
+//   Storage.setCartItems(cart);
+//   //setting the cart values
+//   ui.setCartValues(cart);
+//   //show cart values
+//   ui.addCartItems(cart);
+//   //removing show class
+//   ui.closeCart();
+//   //resetting buttons
+//   ui.resetButtons();
+// });
+
+clearCart.onclick = () => {
+  const ui = new UserInterface();
+  ui.clearCart();
+}
+
+// open the modal on click
+loginLink.onclick = function() {
+  loginModal.style.display = "block";
+}
+
+// close the modal on click
+closeModal.onclick = function() {
+  loginModal.style.display = "none";
+}
+
+// close modal When the user clicks anywhere outside of the modal
+window.onclick = function(event) {
+  if (event.target == loginModal) {
+    loginModal.style.display = "none";
+  }
+}
 
 
 

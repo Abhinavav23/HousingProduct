@@ -26,14 +26,16 @@
                 <li><a href="#Magazine">MAGAZINE</a></li>
             </ul>
             <div class="searchbar">
+                <span><i class="fa-solid fa-magnifying-glass"></i></span>
                 <input type="text">
+                
                 <button class="search">search</button>
             </div>
             <div class="cart-btn">
                 <span ><i class="fas fa-cart-plus"></i></span></li>
                 <div class="cart-items">0</div>
             </div>
-            <a href="#">LOGIN</a>
+            <a id="myBtn" class="login-link">LOGIN</a>
       </div>
     </nav>
 
@@ -59,10 +61,50 @@
             </div>
             <div class="cart-footer">
                 <h3>Your Total: $ <span class="cart-total">0</span></h3>
-                <button class="btn-clear">Clear Cart</button>
+                <button class="btn-buy">Buy</button>
+                <div class="clear">
+                    <button class="btn-clear">Clear Cart</button>
+                </div>
             </div>
+            
         </div>
     </div>
+
+    <!-- Login Model -->
+    <div class="login-modal">
+        <div class="modal-content">
+            <span class="close-modal"> <i class="fas fa-window-close"></i></span>
+            <form action="" class="login">
+                <label for="name">Username</label>
+    
+                <input type="text" name="name" id="name">
+            
+                <label for="password">Password</label>
+        
+                <input type="password" name="" id="password">
+            
+                <input type="submit">
+            </form>
+        </div>
+    </div>
+
+    <!-- Buy Modal -->
+    <div class="buy-modal">
+        <div class="buy-modal-content">
+            <span class="close-buy-modal"> <i class="fas fa-window-close"></i></span>
+            <h3>Here is your order summary</h3>
+            <div class="buy-content">
+                <!-- add cart content here -->
+            </div>
+
+            <div class="cart-footer">
+                <h3>Your Total: $ <span class="total-Buy-Price">0</span></h3>
+            </div>
+            <br>
+            <h3>Thank you for shopping with us !</h3>
+        </div>
+    </div>
+
 
     <script src="./app.js"></script>
   </body>
