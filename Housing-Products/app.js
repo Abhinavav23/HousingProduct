@@ -17,6 +17,9 @@ const closeModal = document.querySelector(".close-modal");
 const closeBuyModal = document.querySelector(".close-buy-modal");
 const btnBuy = document.querySelector(".btn-buy");
 const totalBuyPrice = document.querySelector(".total-Buy-Price");
+const searchButton = document.querySelector(".search-button");
+const searchInput = document.querySelector(".search-input");
+const home = document.querySelector('.home');
 
 //cart products
 let cart = [];
@@ -244,7 +247,7 @@ class UserInterface {
                     <h5>$ ${cartItem.price}</h5>
                 </div>
                 <div class="addremove" data-id=${cartItem.id}>
-                    <p class="itemNo">${cartItem.amount}</p>
+                    <p class="itemNo"> Qty:${cartItem.amount}</p>
                 </div>
               </div>
           `;
@@ -274,13 +277,16 @@ class Storage {
   }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+const ShowProducts = (products=[]) => {
   const p = new Products();
   const ui = new UserInterface();
 
-  p.getProducts()
+  if (products.length){
+    console.log('got products');
+    ui.insertProductsInDom(products);
+  } else{
+    p.getProducts()
     .then((data) => {
-      console.log(data);
       // rendering products in the browser
       ui.insertProductsInDom(data);
       // saving products in the local storage
@@ -289,13 +295,10 @@ document.addEventListener("DOMContentLoaded", () => {
       ui.getBagButtons();
       ui.cartFuntionality();
     })
-    // then will be executed but just you wont recieve anything inside then
-    // .then(() => {
-    //   ui.initialSetup();
-    //   ui.getBagButtons();
-    //   ui.cartFuntionality();
-    // });
-});
+  }
+}
+
+document.addEventListener("DOMContentLoaded", ShowProducts);
 
 cartClose.addEventListener("click", () => {
   const ui = new UserInterface();
@@ -356,6 +359,20 @@ window.onclick = function(event) {
   }
 }
 
+searchButton.onclick = () => {
+  const p = new Products();
+  p.getProducts().then((products) => {
+    let filteredProducts = products.filter((product) => {
+      return product.title.includes(searchInput.value)
+    })
+    ShowProducts(filteredProducts);
+  })
+}
+
+home.onclick = () => {
+  searchInput.value=''
+  ShowProducts()
+};
 
 
 // console.log(document.URL);

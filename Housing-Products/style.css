@@ -78,7 +78,7 @@ a {
 
 /* products */
 .products {
-  padding: 2rem 0;
+  padding: 1rem 0;
 }
 
 .section-title h2 {
@@ -377,7 +377,7 @@ input:focus{
 .login-link:hover{
   cursor: pointer;
 }
-.search{
+.search-button{
   padding: 0.25rem 0.5rem;
   border: 0.125rem solid var(--primarycolor);
   border-radius: 0.25rem;
@@ -389,4 +389,23 @@ input:focus{
 .fa-magnifying-glass{
   position: absolute;
   padding: 0.4rem 0.25rem 0.4rem 0.5rem;
+}
+.search-input{
+  width: 15rem;
+}
+
+.footer{
+  background: var(--rootblack);
+  color: var(--rootwhite);
+  text-align: center;
+  width: 100%;
+  padding: 1rem;
+  position: fixed;
+  bottom: 0;
+}
+
+@media screen and (max-width: 680px) {
+  .navbar-center>ul{
+    display: none;
+  }
 }
