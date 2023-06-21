@@ -79,6 +79,46 @@
         "rating": 4,
         "image": { "fields": { "file": { "url": "./images/product-8.jpeg" } } }
       }
+    },
+    {
+      "sys": { "id": "9" },
+      "fields": {
+        "title": "Living Room",
+        "type": "Sofa set",
+        "price": 1500,
+        "rating": 4,
+        "image": { "fields": { "file": { "url": "./images/product-9.jpeg" } } }
+      }
+    },
+    {
+      "sys": { "id": "10" },
+      "fields": {
+        "title": "Dining set(4)",
+        "type": "Tables & Chairs",
+        "price": 1400,
+        "rating": 3,
+        "image": { "fields": { "file": { "url": "./images/product-10.jpeg" } } }
+      }
+    },
+    {
+      "sys": { "id": "11" },
+      "fields": {
+        "title": "Sofa set(5)",
+        "type": "Lounge",
+        "price": 2000,
+        "rating": 4,
+        "image": { "fields": { "file": { "url": "./images/product-11.jpeg" } } }
+      }
+    },
+    {
+      "sys": { "id": "12" },
+      "fields": {
+        "title": "Sofa set(3)",
+        "type": "Lounge",
+        "price": 1800,
+        "rating": 5,
+        "image": { "fields": { "file": { "url": "./images/product-12.jpeg" } } }
+      }
     }
   ]
 }

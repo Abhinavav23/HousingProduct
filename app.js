@@ -10,20 +10,22 @@ const cartClose = document.querySelector(".close-cart");
 const clearCart = document.querySelector(".btn-clear");
 const removeItem = document.querySelector(".remove-item");
 const loginLink = document.querySelector(".login-link");
+const signUpLink = document.querySelector(".signup-link");
 const loginModal = document.querySelector(".login-modal");
+const signUpModal = document.querySelector(".signup-modal");
 const buyModal = document.querySelector(".buy-modal");
 const buyContent = document.querySelector(".buy-content");
-const closeModal = document.querySelector(".close-modal");
-const closeBuyModal = document.querySelector(".close-buy-modal");
+const closeModal = document.querySelectorAll(".close-modal");
 const btnBuy = document.querySelector(".btn-buy");
 const totalBuyPrice = document.querySelector(".total-Buy-Price");
 const searchButton = document.querySelector(".search-button");
 const searchInput = document.querySelector(".search-input");
 const home = document.querySelector('.home');
+const shop = document.querySelector('.shop');
+
 
 //cart products
 let cart = [];
-// let itemNo = 1;
 
 //products class
 class Products {
@@ -31,14 +33,21 @@ class Products {
     try {
       const result = await fetch("data/products.json"); //returns response object
       let products = await result.json(); // to get the data from response object
-      let data = products.items;
-      data = data.map((item) => {
+      // fetch("data/products.json")
+      // .then((res) => {
+      //   return res.json()
+      // })
+      // .then((data) => {
+
+      // })
+      const data = products.items;
+      const structuredData = data.map((item) => {
         const { title, price, type, rating } = item.fields;
         const id = item.sys.id;
         const url = item.fields.image.fields.file.url;
         return { title, price, type, rating, id, url };
       });
-      return data;
+      return structuredData;
     } catch (error) {
       console.log(error);
     }
@@ -137,7 +146,7 @@ class UserInterface {
         btn.innerHTML = "In Cart";
         btn.disabled = true;
       } else {
-        btn.innerHTML = "Add to Cart";
+        btn.innerHTML = '<i class="fas fa-shopping-cart"></i>Add to Cart';
         btn.disabled = false;
       }
     });
@@ -160,7 +169,7 @@ class UserInterface {
         //update the cartItems
         selectedProduct = { ...selectedProduct, amount: 1 };
         cart = [...cart, selectedProduct];
-        //updating cart in localStorag
+        //updating cart in sessionStorage
         Storage.setCartItems(cart);
         //setting the cart values
         this.setCartValues(cart);
@@ -260,19 +269,19 @@ class UserInterface {
 //storage class
 class Storage {
   static saveProducts(products) {
-    localStorage.setItem("Products", JSON.stringify(products));
+    sessionStorage.setItem("Products", JSON.stringify(products));
   }
   static getLocalProduct(id) {
-    return JSON.parse(localStorage.getItem("Products")).find(
+    return JSON.parse(sessionStorage.getItem("Products")).find(
       (prod) => prod.id === id
     );
   }
   static setCartItems(cart) {
-    localStorage.setItem("Cart", JSON.stringify(cart));
+    sessionStorage.setItem("Cart", JSON.stringify(cart));
   }
   static getCart() {
-    return localStorage.getItem("Cart")
-      ? JSON.parse(localStorage.getItem("Cart"))
+    return sessionStorage.getItem("Cart")
+      ? JSON.parse(sessionStorage.getItem("Cart"))
       : [];
   }
 }
@@ -289,7 +298,7 @@ const ShowProducts = (products=[]) => {
     .then((data) => {
       // rendering products in the browser
       ui.insertProductsInDom(data);
-      // saving products in the local storage
+      // saving products in the session storage
       Storage.saveProducts(data);
       ui.initialSetup();
       ui.getBagButtons();
@@ -319,10 +328,6 @@ btnBuy.onclick = () => {
   buyModal.style.display = "block";
 }
 
-closeBuyModal.onclick = () => {
-  buyModal.style.display = "none";
-}
-
 // clearCart.addEventListener("click", () => {
 //   const ui = new UserInterface();
 //   cart = [];
@@ -346,11 +351,16 @@ clearCart.onclick = () => {
 loginLink.onclick = function() {
   loginModal.style.display = "block";
 }
+signUpLink.onclick = function() {
+  signUpModal.style.display = "block";
+}
 
 // close the modal on click
-closeModal.onclick = function() {
-  loginModal.style.display = "none";
-}
+closeModal.forEach((el) => {
+  el.onclick = function(e) {
+    e.target.parentElement.parentElement.parentElement.style.display = 'none'
+  }
+})
 
 // close modal When the user clicks anywhere outside of the modal
 window.onclick = function(event) {
@@ -373,6 +383,11 @@ home.onclick = () => {
   searchInput.value=''
   ShowProducts()
 };
+
+shop.onclick = () => {
+  const ui = new UserInterface();
+  ui.showCart();
+}
 
 
 // console.log(document.URL);

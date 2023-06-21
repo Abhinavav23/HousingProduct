@@ -284,7 +284,7 @@ a {
   color: var(--primarycolor);
 }
 
-.login-modal {
+.login-modal, .signup-modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
@@ -404,8 +404,11 @@ input:focus{
   bottom: 0;
 }
 
-@media screen and (max-width: 680px) {
+@media screen and (max-width: 750px) {
   .navbar-center>ul{
+    display: none;
+  }
+  .links {
     display: none;
   }
 }

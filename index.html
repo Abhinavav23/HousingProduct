@@ -22,7 +22,7 @@
             </span>
             <ul>
                 <li><a class="home" href="#Home">HOME</a></li>
-                <li><a href="#Shop">SHOP</a></li>
+                <li><a class="shop" href="#Shop">SHOP</a></li>
                 <li><a href="#Magazine">MAGAZINE</a></li>
             </ul>
             <div class="searchbar">
@@ -35,7 +35,10 @@
                 <span ><i class="fas fa-cart-plus"></i></span></li>
                 <div class="cart-items">0</div>
             </div>
-            <a id="myBtn" class="login-link">LOGIN</a>
+            <div class="links">
+                <a class="login-link">LOGIN</a>
+                <a class="signup-link">SIGNUP</a>
+            </div>
       </div>
     </nav>
 
@@ -89,13 +92,35 @@
         </div>
     </div>
 
+    <!-- Signup Model -->
+    <div class="signup-modal">
+        <div class="modal-content">
+            <span class="close-modal"> <i class="fas fa-window-close"></i></span>
+            <form action="" class="login">
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name">
+            
+                <label for="name">Email</label>
+                <input type="text" name="name" id="name">
+
+                <label for="name">Email</label>
+                <input type="text" name="name" id="name">
+
+                <label for="password">Password</label>
+                <input type="password" name="" id="password">
+            
+                <input type="submit">
+            </form>
+        </div>
+    </div>
+
     <!-- Buy Modal -->
     <div class="buy-modal">
         <div class="buy-modal-content">
-            <span class="close-buy-modal"> <i class="fas fa-window-close"></i></span>
+            <span class="close-modal"> <i class="fas fa-window-close"></i></span>
             <h3>Here is your order summary</h3>
             <div class="buy-content">
-                
+
                 <!-- add cart content here -->
             </div>
 
@@ -114,6 +139,6 @@
     </footer>
 
     <script src="./app.js"></script>
-    <script src="./script.js"> </script>
+    <!-- <script src="./script.js"> </script> -->
   </body>
 </html>
