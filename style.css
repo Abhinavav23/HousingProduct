@@ -4,9 +4,12 @@
   --rootblack: #222222;
   --rootwhite: #ffffff;
   --rootgrey: #ececec;
-  --primarycolor: #f09d51;
+  --primarycolor: #e27107b7;
+  --primarycolorHover: #f25d07;
+
   --rootspacing: 0.1rem;
   --mainTransition: all 0.3s linear;
+  --rootDarkGray: #3d3d3d;
 }
 
 * {
@@ -34,7 +37,7 @@ a {
   top: 0;
   height: 50px;
   width: 100%;
-  background: var(--rootwhite);
+  background: var(--rootgrey);
   display: flex;
   z-index: 1;
   align-items: center;
@@ -266,10 +269,11 @@ a {
   text-transform: capitalize;
   margin-bottom: 2rem;
 }
-.clear{
+.clear {
   margin-top: 1rem;
 }
-.btn-clear, .btn-buy {
+.btn-clear,
+.btn-buy {
   text-transform: uppercase;
   font-size: 1.1rem;
   background-color: var(--primarycolor);
@@ -279,12 +283,14 @@ a {
   border-radius: 5px;
   color: var(--rootwhite);
 }
-.btn-clear:hover, .btn-buy:hover {
+.btn-clear:hover,
+.btn-buy:hover {
   background: #222222;
   color: var(--primarycolor);
 }
 
-.login-modal, .signup-modal {
+.login-modal,
+.signup-modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
@@ -294,8 +300,8 @@ a {
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.6); /* Black w/ opacity */
 }
 
 .buy-modal {
@@ -308,8 +314,8 @@ a {
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
 
 /* Modal Content */
@@ -340,7 +346,8 @@ a {
 }
 
 /* The Close Button */
-.close-modal, .close-buy-modal {
+.close-modal,
+.close-buy-modal {
   color: #aaaaaa;
   align-self: flex-end;
   font-size: 2rem;
@@ -355,18 +362,19 @@ a {
   cursor: pointer;
 }
 
-input{
+input {
   padding: 0.25rem 0.5rem;
   border: 0.125rem solid rgb(164, 162, 162);
   border-radius: 0.25rem;
 }
 
-input:focus{
+input:focus {
   outline: none;
   border: 0.125rem solid var(--primarycolor);
 }
 
-.login{
+.login-form,
+.signup-form {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -374,27 +382,47 @@ input:focus{
   gap: 0.5rem;
 }
 
-.login-link:hover{
+.links:hover {
   cursor: pointer;
 }
-.search-button{
+.search-button {
   padding: 0.25rem 0.5rem;
   border: 0.125rem solid var(--primarycolor);
   border-radius: 0.25rem;
-  color: var( --rootgrey);
+  color: var(--rootgrey);
   background: var(--primarycolor);
   cursor: pointer;
   font-weight: bold;
 }
-.fa-magnifying-glass{
+.fa-magnifying-glass {
   position: absolute;
   padding: 0.4rem 0.25rem 0.4rem 0.5rem;
 }
-.search-input{
+.search-input {
+  padding-left: 30px;
   width: 15rem;
 }
+.search-icon {
+  color: var(--rootDarkGray);
+}
 
-.footer{
+input[type="submit"] {
+  background-color: var(--primarycolor);
+  color: var(--rootgrey);
+  padding: 0.5rem 0.75rem;
+  border: none;
+}
+
+input[type="submit"]:hover {
+  background-color: var(--primarycolorHover);
+  cursor: pointer;
+}
+.form-header {
+  padding-bottom: 1.5rem;
+  color: var(--primarycolor);
+}
+
+.footer {
   background: var(--rootblack);
   color: var(--rootwhite);
   text-align: center;
@@ -405,7 +433,7 @@ input:focus{
 }
 
 @media screen and (max-width: 750px) {
-  .navbar-center>ul{
+  .navbar-center > ul {
     display: none;
   }
   .links {

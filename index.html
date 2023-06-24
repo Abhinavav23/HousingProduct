@@ -26,7 +26,7 @@
                 <li><a href="#Magazine">MAGAZINE</a></li>
             </ul>
             <div class="searchbar">
-                <!-- <span><i class="fa-solid fa-magnifying-glass"></i></span> -->
+                <span class="search-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
                 <input class="search-input" placeholder="search products" type="text">
                 
                 <button onClick="" class="search-button">search</button>
@@ -38,7 +38,9 @@
             <div class="links">
                 <a class="login-link">LOGIN</a>
                 <a class="signup-link">SIGNUP</a>
+                <a class="logout-link">LOGOUT</a>
             </div>
+            <div class="username"></div>
       </div>
     </nav>
 
@@ -70,7 +72,6 @@
                     <button class="btn-clear">Clear Cart</button>
                 </div>
             </div>
-            
         </div>
     </div>
 
@@ -78,16 +79,15 @@
     <div class="login-modal">
         <div class="modal-content">
             <span class="close-modal"> <i class="fas fa-window-close"></i></span>
-            <form action="" class="login">
-                <label for="name">Username</label>
-    
-                <input type="text" name="name" id="name">
-            
-                <label for="password">Password</label>
+            <h3 class="form-header">Login Here !</h3>
+
+            <form action="" class="login-form">
+                <label for="email">Email</label>
+                <input type="text" name="email" id="email" required>
         
-                <input type="password" name="" id="password">
-            
-                <input type="submit">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" required>
+                <input type="submit" value="LOGIN">
             </form>
         </div>
     </div>
@@ -96,20 +96,18 @@
     <div class="signup-modal">
         <div class="modal-content">
             <span class="close-modal"> <i class="fas fa-window-close"></i></span>
-            <form action="" class="login">
-                <label for="name">Name</label>
-                <input type="text" name="name" id="name">
+            <h3 class="form-header">Create an Account With US !</h3>
+            <form action="" class="signup-form">
+                <label for="username">Name</label>
+                <input type="text" name="username" id="name">
             
-                <label for="name">Email</label>
-                <input type="text" name="name" id="name">
-
-                <label for="name">Email</label>
-                <input type="text" name="name" id="name">
+                <label for="email">Email</label>
+                <input type="text" name="email" id="name">
 
                 <label for="password">Password</label>
-                <input type="password" name="" id="password">
+                <input type="password" name="password" id="password">
             
-                <input type="submit">
+                <input type="submit" value="SIGN UP">
             </form>
         </div>
     </div>

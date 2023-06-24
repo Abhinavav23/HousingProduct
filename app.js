@@ -1,5 +1,9 @@
 //dom Elements
 const productDom = document.querySelector(".products-center");
+const home = document.querySelector(".home");
+const shop = document.querySelector(".shop");
+
+// cart
 const cartDom = document.querySelector(".cart-content");
 const cartMain = document.querySelector(".cart");
 const cartPrice = document.querySelector(".cart-total");
@@ -8,24 +12,37 @@ const cartOverlay = document.querySelector(".cart-overlay");
 const cartButton = document.querySelector(".cart-btn");
 const cartClose = document.querySelector(".close-cart");
 const clearCart = document.querySelector(".btn-clear");
-const removeItem = document.querySelector(".remove-item");
-const loginLink = document.querySelector(".login-link");
-const signUpLink = document.querySelector(".signup-link");
+const btnBuy = document.querySelector(".btn-buy");
+const totalBuyPrice = document.querySelector(".total-Buy-Price");
+
+//modal
 const loginModal = document.querySelector(".login-modal");
 const signUpModal = document.querySelector(".signup-modal");
 const buyModal = document.querySelector(".buy-modal");
 const buyContent = document.querySelector(".buy-content");
 const closeModal = document.querySelectorAll(".close-modal");
-const btnBuy = document.querySelector(".btn-buy");
-const totalBuyPrice = document.querySelector(".total-Buy-Price");
-const searchButton = document.querySelector(".search-button");
-const searchInput = document.querySelector(".search-input");
-const home = document.querySelector('.home');
-const shop = document.querySelector('.shop');
 
+// header
+const searchButton = document.querySelector(".search-button");
+const loginLink = document.querySelector(".login-link");
+const signUpLink = document.querySelector(".signup-link");
+const LogoutLink = document.querySelector(".logout-link");
+const searchInput = document.querySelector(".search-input");
+
+// forms
+const logInForm = document.querySelector(".login-form");
+const signUpForm = document.querySelector(".signup-form");
+const userEl = document.querySelector(".username");
+const navbarLinks = document.querySelector(".links");
 
 //cart products
 let cart = [];
+
+const LOGIN_STATES = {
+  SUCCESS: "success",
+  WRONG_PASSWORD: "wrong password",
+  NOT_VALID: "not a valid iser",
+};
 
 //products class
 class Products {
@@ -59,12 +76,12 @@ class UserInterface {
   insertProductsInDom(products) {
     let result = "";
     products.forEach((element) => {
-      let star="";
-      for(let i = 0; i<element.rating;i++){
-        star += `<i class="fas fa-star"></i>` //gives a filled star
+      let star = "";
+      for (let i = 0; i < element.rating; i++) {
+        star += `<i class="fas fa-star"></i>`; //gives a filled star
       }
-      for(let i = 0; i<5-element.rating;i++){
-        star += `<i class="far fa-star"></i>`
+      for (let i = 0; i < 5 - element.rating; i++) {
+        star += `<i class="far fa-star"></i>`;
       }
       result += `
             <article class="product">
@@ -198,8 +215,10 @@ class UserInterface {
         this.resetButtons();
       }
       if (event.target.classList.contains("fa-plus-circle")) {
-        let tempItem = cart.find(item => item.id === event.target.parentElement.dataset.id)
-        tempItem.amount = tempItem.amount + 1
+        let tempItem = cart.find(
+          (item) => item.id === event.target.parentElement.dataset.id
+        );
+        tempItem.amount = tempItem.amount + 1;
         Storage.setCartItems(cart);
         //setting the cart values
         this.setCartValues(cart);
@@ -207,8 +226,10 @@ class UserInterface {
         this.addCartItems(cart);
       }
       if (event.target.classList.contains("fa-minus-circle")) {
-        let tempItem = cart.find(item => item.id === event.target.parentElement.dataset.id)
-        if(tempItem.amount === 1){
+        let tempItem = cart.find(
+          (item) => item.id === event.target.parentElement.dataset.id
+        );
+        if (tempItem.amount === 1) {
           let index = cart.findIndex(
             (item) => item.id === event.target.parentElement.dataset.id
           );
@@ -221,7 +242,7 @@ class UserInterface {
           //resetting buttons
           this.resetButtons();
         }
-        tempItem.amount = tempItem.amount - 1
+        tempItem.amount = tempItem.amount - 1;
         Storage.setCartItems(cart);
         //setting the cart values
         this.setCartValues(cart);
@@ -231,7 +252,7 @@ class UserInterface {
     });
   }
 
-  clearCart(){
+  clearCart() {
     cart = [];
     Storage.setCartItems(cart);
     //setting the cart values
@@ -244,11 +265,11 @@ class UserInterface {
     this.resetButtons();
   }
 
-  addCartItemsToModel(cart){
+  addCartItemsToModel(cart) {
     let cartHtml = "";
-    let totalPrice = 0
+    let totalPrice = 0;
     cart.forEach((cartItem) => {
-      totalPrice += cartItem.price*cartItem.amount
+      totalPrice += cartItem.price * cartItem.amount;
       cartHtml += ` <div class="cart-item">
                 <img src=${cartItem.url} alt="cart">
                 <div>
@@ -284,18 +305,53 @@ class Storage {
       ? JSON.parse(sessionStorage.getItem("Cart"))
       : [];
   }
+  static createUser(user) {
+    const userList = JSON.parse(sessionStorage.getItem("users"));
+    if (userList) {
+      userList.push(user);
+      sessionStorage.setItem("users", JSON.stringify(userList));
+    } else {
+      sessionStorage.setItem("users", JSON.stringify([user]));
+    }
+  }
+
+  static getUser(userInfo) {
+    const userList = JSON.parse(sessionStorage.getItem("users"));
+    if (userList) {
+      const user = userList.find(
+        (userInStore) => userInStore.email === userInfo.email
+      );
+      if (user) {
+        if (user.password === userInfo.password) {
+          return { state: LOGIN_STATES.SUCCESS, user };
+        } else {
+          return { state: LOGIN_STATES.WRONG_PASSWORD };
+        }
+      } else {
+        return { state: LOGIN_STATES.NOT_VALID };
+      }
+    } else {
+      return "no user created";
+    }
+  }
+
+  static setLoggedInUser(user) {
+    sessionStorage.setItem("loggedInUser", JSON.stringify(user));
+  }
+  static getLoggedInUser() {
+    return JSON.parse(sessionStorage.getItem("loggedInUser"));
+  }
 }
 
-const ShowProducts = (products=[]) => {
+const ShowProducts = (products = []) => {
   const p = new Products();
   const ui = new UserInterface();
 
-  if (products.length){
-    console.log('got products');
+  if (products.length) {
+    console.log("got products");
     ui.insertProductsInDom(products);
-  } else{
-    p.getProducts()
-    .then((data) => {
+  } else {
+    p.getProducts().then((data) => {
       // rendering products in the browser
       ui.insertProductsInDom(data);
       // saving products in the session storage
@@ -303,9 +359,9 @@ const ShowProducts = (products=[]) => {
       ui.initialSetup();
       ui.getBagButtons();
       ui.cartFuntionality();
-    })
+    });
   }
-}
+};
 
 document.addEventListener("DOMContentLoaded", ShowProducts);
 
@@ -324,9 +380,9 @@ btnBuy.onclick = () => {
   let cartval = Storage.getCart();
   ui.addCartItemsToModel(cartval);
   ui.closeCart();
-  ui.clearCart()
+  ui.clearCart();
   buyModal.style.display = "block";
-}
+};
 
 // clearCart.addEventListener("click", () => {
 //   const ui = new UserInterface();
@@ -345,50 +401,115 @@ btnBuy.onclick = () => {
 clearCart.onclick = () => {
   const ui = new UserInterface();
   ui.clearCart();
-}
+};
 
 // open the modal on click
-loginLink.onclick = function() {
+loginLink.onclick = function () {
   loginModal.style.display = "block";
-}
-signUpLink.onclick = function() {
+};
+signUpLink.onclick = function () {
   signUpModal.style.display = "block";
-}
+};
 
 // close the modal on click
 closeModal.forEach((el) => {
-  el.onclick = function(e) {
-    e.target.parentElement.parentElement.parentElement.style.display = 'none'
-  }
-})
+  el.onclick = function (e) {
+    e.target.parentElement.parentElement.parentElement.style.display = "none";
+  };
+});
 
 // close modal When the user clicks anywhere outside of the modal
-window.onclick = function(event) {
+window.onclick = function (event) {
   if (event.target == loginModal) {
     loginModal.style.display = "none";
   }
-}
+  if (event.target == signUpModal) {
+    signUpModal.style.display = "none";
+  }
+};
 
 searchButton.onclick = () => {
   const p = new Products();
   p.getProducts().then((products) => {
     let filteredProducts = products.filter((product) => {
-      return product.title.includes(searchInput.value)
-    })
+      return product.title.includes(searchInput.value);
+    });
     ShowProducts(filteredProducts);
-  })
-}
+  });
+};
 
 home.onclick = () => {
-  searchInput.value=''
-  ShowProducts()
+  searchInput.value = "";
+  ShowProducts();
 };
 
 shop.onclick = () => {
   const ui = new UserInterface();
   ui.showCart();
-}
+};
 
+// handle forms
+
+const setLoggedInUser = (user) => {
+  console.log("seeting user 111");
+  Storage.setLoggedInUser(user);
+  handleLoggedInState();
+  console.log("seeting user 222");
+  window.location.reload();
+};
+
+const handleLoggedInState = () => {
+  const user = Storage.getLoggedInUser();
+  if (user) {
+    loginLink.style.display = "none";
+    signUpLink.style.display = "none";
+    LogoutLink.style.display = "block";
+    userEl.style.display = "block";
+    userEl.textContent = user.username;
+    console.log(user);
+  } else {
+    LogoutLink.style.display = "none";
+    userEl.style.display = "none";
+  }
+};
+
+LogoutLink.onclick = () => {
+  Storage.setLoggedInUser(null);
+  window.location.reload();
+};
+
+signUpForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const signUpFormData = new FormData(signUpForm);
+  const username = signUpFormData.get("username");
+  const email = signUpFormData.get("email");
+  const password = signUpFormData.get("password");
+  Storage.createUser({ username, email, password });
+  setLoggedInUser({ username, email, password });
+  signUpForm.reset();
+  e.target.parentElement.parentElement.style.display = "none";
+});
+
+logInForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const logInFormData = new FormData(logInForm);
+  const email = logInFormData.get("email");
+  const password = logInFormData.get("password");
+  const response = Storage.getUser({ email, password });
+  if (response.state === LOGIN_STATES.SUCCESS) {
+    setLoggedInUser({ username, email, password });
+    e.target.parentElement.parentElement.style.display = "none";
+  } else if (response.state === LOGIN_STATES.WRONG_PASSWORD) {
+    alert("Wrong Password!, Please try again");
+  } else if (response.state === LOGIN_STATES.NOT_VALID) {
+    alert("you are not an USER!, Please Sign Up first!");
+  } else {
+    alert("No user created yet, Please signup");
+  }
+  logInForm.reset();
+});
+
+document.addEventListener("DOMContentLoaded", handleLoggedInState);
 
 // console.log(document.URL);
 
@@ -398,8 +519,7 @@ shop.onclick = () => {
 //   val += el
 // })
 
-
-// export 
+// export
 // import
 
 // export const getProducts = async() => {
