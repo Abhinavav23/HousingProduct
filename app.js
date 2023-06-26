@@ -497,7 +497,7 @@ logInForm.addEventListener("submit", (e) => {
   const password = logInFormData.get("password");
   const response = Storage.getUser({ email, password });
   if (response.state === LOGIN_STATES.SUCCESS) {
-    setLoggedInUser({ username, email, password });
+    setLoggedInUser(response.user);
     e.target.parentElement.parentElement.style.display = "none";
   } else if (response.state === LOGIN_STATES.WRONG_PASSWORD) {
     alert("Wrong Password!, Please try again");
